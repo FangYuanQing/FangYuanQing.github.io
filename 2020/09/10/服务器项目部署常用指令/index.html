@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><meta name="theme-color" content="#2d4356"><meta name="baidu-site-verification"><title>服务器项目部署常用指令 | 个人笔记</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.png"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script><meta name="generator" content="Hexo 5.1.1"></head><link rel="stylesheet" type="text/css" href="/plugins/prettify/doxy.css"><script type="text/javascript" src="/js/ready.js" async></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><body class="night"><div class="mobile-head" id="mobile-head"><div class="navbar-icon"><span></span><span></span><span></span></div><div class="navbar-title"><a href="/">LITREILY</a></div><div class="navbar-search"><!--= show a circle here--></div></div><div class="h-wrapper" id="menu"><nav class="h-head box"><div class="m-hdimg"><a class="hdimg img" href="/"><img class="nofancybox" src="/img/profile.jpg" width="128" height="128"></a><h1 class="ttl"><a href="/">个人笔记</a></h1></div><p class="m-desc">心之所向，无惧无悔,<br>愿求仁得仁，复无怨怼！</p><div class="m-nav"><ul><li><span class="dot">●</span><a href="/archives/">归档</a></li><li><span class="dot">●</span><a href="/categories/">分类</a></li><li><span class="dot">●</span><a href="/tags/">标签</a></li><li><span class="dot">●</span><a href="/about/">关于</a></li><li><span class="dot">●</span><a href="/atom.xml">RSS</a></li><li class="m-sch"><form class="form" id="j-formsch" method="get"><input class="txt" type="text" id="local-search-input" name="q" value="搜索" onfocus="if(this.value=='搜索'){this.value='';}" onblur="if(this.value==''){this.value='搜索';}"><input type="text" style="display:none;"></form></li></ul><div id="local-search-result"></div></div></nav></div><div id="back2Top"><a class="fa fa-arrow-up" title="Back to top" href="#"></a></div><div class="box" id="container"><div class="l-wrapper"><div class="l-content box"><div class="l-post l-post-art"><article class="p-art"><div class="p-header box"><h1 class="p-title">服务器项目部署常用指令</h1><div class="p-info"><span class="p-date"><i class="fa fa-calendar"></i><a href="/2020/09/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">2020-09-10</a></span><span class="p-view" id="busuanzi_container_page_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"></span></span></div></div><div class="p-content"><h2 id="服务器项目部署常用指令"><a href="#服务器项目部署常用指令" class="headerlink" title="服务器项目部署常用指令"></a>服务器项目部署常用指令</h2><h3 id="一、项目启动"><a href="#一、项目启动" class="headerlink" title="一、项目启动"></a>一、项目启动</h3><blockquote>
+<ul>
+<li><p><strong>ps -ef|grep java              ——看有关java的进程    ps -ef是显示所有进程信息   后面那个grep是匹配的意思</strong></p>
+</li>
+<li><p><strong>kill -9 123123 213231         ——后面两个数字是两个进程的进程号pid，多少个进程要kill好像都可以写在后面</strong></p>
+</li>
+<li><p>nohup java -jar xxxxx.jar &amp;   ——后台启动java工程的命令<br>后面加个&amp;的命令是后台运行的意思；<br>nohup是no hang up，不挂起，就用户退出还可以运行的意思（好像是这样）。   </p>
+<p>如果使用nohup命令提交作业，那么在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中，除非另外指定了输出文件:<br>nohup java -jar xxxx.jar &gt; myout.out 2&gt;&amp;1 &amp;<br>这个2&gt;1&amp;的意思就是将标准错误重定向到标准输出。</p>
+</li>
+<li><p>tail -f nohup.out            ——可以实时监控刚刚那个后台java命令的输出。 额进去了好像就要一直看着它更新，不能干其他的事，可以用ctrl+z强制退出，反正只是退出这个监控。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="二、防火墙"><a href="#二、防火墙" class="headerlink" title="二、防火墙"></a>二、防火墙</h2><blockquote>
+<ul>
+<li><p>systemctl start firewalld.service          ——启动防火墙服务（启动一个服务）</p>
+</li>
+<li><p>systemctl stop firewalld.service           ——关闭防火墙服务（关闭一个服务）</p>
+</li>
+<li><p>systemctl restart firewalld.service        ——重启防火墙服务（重启一个服务）</p>
+</li>
+<li><p>systemctl status firewalld.service         ——显示防火墙服务的状态（显示一个服务的状态）</p>
+</li>
+<li><p>systemctl enable firewalld.service         ——开机启动防火墙</p>
+</li>
+<li><p>systemctl disable firewalld.service        ——开机禁止启动防火墙</p>
+</li>
+<li><p>systemctl is-enabled firewalld.service     ——查看防火墙是不是开机启动</p>
+</li>
+<li><p>systemctl list-unit-files|grep enabled     ——查看已经启动的服务列表</p>
+</li>
+<li><p>systemctl –failed                         ——查看启动失败的服务列表</p>
+</li>
+<li><p>systemctl daemon-reload                    ——刚刚配置的服务需要让systemctl能识别，就必须刷新配置</p>
+</li>
+<li><p>firewall-cmd –state                       ——显示防火墙状态</p>
+</li>
+<li><p>firewall-cmd –zone=public –list-ports    ——查看防火墙中所有打开的端口</p>
+</li>
+<li><p>firewall-cmd –reload                      ——更新防火墙规则 实例，开80端口 </p>
+</li>
+<li><p>firewall-cmd –zone=public –add-port=80/tcp –permanent           ——permanent永久生效，没有这个参数重启后就失效</p>
+</li>
+<li><p>firewall-cmd –reload                                              ——刷新一下防火墙</p>
+</li>
+<li><p>firewall-cmd –zone=public –query-port=80/tcp                    ——查看一下防火墙80端口</p>
+</li>
+<li><p>firewall-cmd –zone=public –remove-port=80/tcp –permanent       ——删除这个端口的开放</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="三、用shell启动jar项目"><a href="#三、用shell启动jar项目" class="headerlink" title="三、用shell启动jar项目"></a>三、用shell启动jar项目</h2><p>1.在指定位置下创建.sh文件</p>
+<pre><code class="shell">vim xxx.sh</code></pre>
+<p>2.编辑xxx.sh</p>
+<pre><code>#/bin/bash
+nohup java -jar /usr/local/java/jar/项目.jar  &gt; /usr/local/java/log/日志.log 2&gt;&amp;1 &amp;</code></pre>
+<p>3.启动shell脚本</p>
+<pre><code>./xxx.sh     //需要在当前文件夹内执行</code></pre>
+</div><div class="p-copyright"><blockquote><div class="p-copyright-author"><span class="p-copyright-key">本文作者：</span><span class="p-copytight-value"><a href="mailto:litreily@163.com">FangYuanQing</a></span></div><div class="p-copyright-link"><span class="p-copyright-key">本文链接：</span><span class="p-copytight-value"><a href="/2020/09/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">http://example.com/2020/09/10/服务器项目部署常用指令/</a></span></div><div class="p-copyright-note"><span class="p-copyright-key">版权声明：</span><span class="p-copytight-value">本博客所有文章除特殊声明外，均采用<a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/"> CC BY-NC 4.0 </a>许可协议。转载请注明出处 <a href="http://example.com">FangYuanQing的博客</a>！</span></div></blockquote></div></article><div class="p-info box"></div><aside id="toc"><div class="toc-title">目录</div><nav><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">服务器项目部署常用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8"><span class="toc-number">1.1.</span> <span class="toc-text">一、项目启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">2.</span> <span class="toc-text">二、防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%94%A8shell%E5%90%AF%E5%8A%A8jar%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text">三、用shell启动jar项目</span></a></li></ol></nav></aside></div><section class="p-ext"><div class="l-pager l-pager-dtl box"><a class="next" href="/2020/09/10/hello-world/">Hello World &gt;</a></div><div id="valine-comment"><style type="text/css">.night .v[data-class=v] a { color: #0F9FB4 !important; }
+.night .v[data-class=v] a:hover { color: #216C73 !important; }
+.night .v[data-class=v] li { list-style: inherit; }
+.night .v[data-class=v] .vwrap { border: 1px solid #223441; border-radius: 0; }
+.night .v[data-class=v] .vwrap:hover { box-shadow: 0 0 6px 1px #223441; }
+.night .v[data-class=v] .vbtn { border-radius: 0; background: none; }
+.night .v[data-class=v] .vlist .vcard .vh { border-bottom-color: #293D4E; }
+.night .v[data-class=v] .vwrap .vheader .vinput { border-bottom-color: #223441; }
+.night .v[data-class=v] .vwrap .vheader .vinput:focus { border-bottom-color: #339EB4; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre,.night .v[data-class=v] .vlist .vcard .vhead .vsys { background: #203240 !important; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre { color: #F0F0F0; font-size: 95%; }
+.v[data-class=v] .vcards .vcard .vh {border-bottom-color: #223441; }
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:before {background: linear-gradient(180deg,rgba(38,57,73,.4),rgba(38,57,73,.9));}
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:after {background: rgba(38,57,73,.9)}
+</style><div id="vcomment"></div><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'',
+  appKey:'',
+  lang: 'zh-cn',
+  placeholder:'ヾﾉ≧∀≦)o Come on, say something...',
+  avatar:'identicon',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></section><footer><p>Copyright © 2016 - 2020 <a href="/." rel="nofollow">个人笔记</a> | <strong><a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></strong><br><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span></span> <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a>Theme with<a rel="nofollow" target="_blank" href="https://github.com/litreily/snark-hexo"> snark.</a></p></footer></div></div></div><script type="text/javascript" src="/plugins/prettify/prettify.js"></script><script type="text/javascript" src="/js/search.js"></script><script type="text/javascript" src="/js/top.js"></script><script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+    search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script></body></html>
